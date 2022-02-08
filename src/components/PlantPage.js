@@ -29,6 +29,12 @@ function PlantPage() {
     setPlants(updatedPlants)
   }
 
+  function handleDelete(id) {
+    // const updatePlants = plants.filter(plant => plant.id !== id)
+    // setPlants(updatePlants)
+    console.log("id:", id)
+  }
+
 
   return (
     <main>
@@ -39,7 +45,7 @@ function PlantPage() {
         setNewPlantPrice={setNewPlantPrice}
       />
       <Search />
-      <PlantList plants={plants} />
+      <PlantList plants={plants} handleDelete={handleDelete} />
     </main>
   );
 }
