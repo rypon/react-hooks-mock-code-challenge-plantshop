@@ -7,7 +7,10 @@ import Search from "./Search";
 
 function PlantPage() {
 
-  const [plants, setPlants] = useState()
+  const [plants, setPlants] = useState([])
+  const [newPlantName, setNewPlantName] = useState('')
+  const [newPlantImage, setNewPlantImage] = useState('')
+  const [newPlantPrice, setNewPlantPrice] = useState('')
 
   useEffect(() => {
     fetch('http://localhost:6001/plants')
@@ -15,9 +18,26 @@ function PlantPage() {
       .then(plantsArray => setPlants(plantsArray))
   }, [])
 
+  function handleAddPlant(e) {
+    e.preventDefault()
+    const newPlant = {
+      name: newPlantName,
+      image: newPlantImage,
+      price: newPlantPrice
+    }
+    const updatedPlants = [...plants, newPlant]
+    setPlants(updatedPlants)
+  }
+
+
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm
+        handleAddPlant={handleAddPlant}
+        setNewPlantName={setNewPlantName}
+        setNewPlantImage={setNewPlantImage}
+        setNewPlantPrice={setNewPlantPrice}
+      />
       <Search />
       <PlantList plants={plants} />
     </main>
